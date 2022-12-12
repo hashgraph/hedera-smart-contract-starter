@@ -1,0 +1,24 @@
+{
+  "name": "hedera-smart-contract-starter",
+  "version": "1.0.0",
+  "description": "A starter project for Smart Contracts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hashgraph/hedera-smart-contract-starter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hashgraph/hedera-smart-contract-starter/issues"
+  },
+  "homepage": "https://github.com/hashgraph/hedera-smart-contract-starter#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "hardhat": "^2.12.4"
+  }
+}

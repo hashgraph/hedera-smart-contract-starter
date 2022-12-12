@@ -11,7 +11,6 @@ const config: HardhatUserConfig = {
     hedera: {
       url: process.env.JSON_RPC_URL || "",
       chainId: 296,
-      from: "",
       gas: "auto",
       gasPrice: "auto",
       accounts: [process.env.PRIVATE_KEY || ""]

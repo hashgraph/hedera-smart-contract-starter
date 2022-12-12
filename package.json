@@ -19,6 +19,10 @@
   "homepage": "https://github.com/hashgraph/hedera-smart-contract-starter#readme",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "dotenv": "^16.0.3",
     "hardhat": "^2.12.4"
+  },
+  "dependencies": {
+    "@hashgraph/sdk": "^2.19.0"
   }
 }

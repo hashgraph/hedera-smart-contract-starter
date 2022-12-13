@@ -14,8 +14,8 @@ contract Bank {
    }
    function withdraw(uint _amount) external {     
      require(accounts[msg.sender] >= _amount, "Insufficient balance!");
-     payable(owner).transfer(_amount);
-     accounts[msg.sender] -= _amount;
+     accounts[msg.sender] = accounts[msg.sender] - _amount;
+     payable(msg.sender).transfer(_amount);
    }
 
    function getBalance() public view returns (uint res) {

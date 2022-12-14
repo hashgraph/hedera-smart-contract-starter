@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 
-const { JSON_RPC_URL, PRIVATE_KEY } = process.env;
+const { JSON_RPC_URL, ECDSA_PRIVATE_KEY } = process.env;
 
 dotenv.config();
 
@@ -12,10 +12,9 @@ const config: HardhatUserConfig = {
     hardhat: {},
     hedera: {
       url: JSON_RPC_URL || "",
-      chainId: 296,
       gas: "auto",
       gasPrice: "auto",
-      accounts: [PRIVATE_KEY || ""]
+      accounts: [ECDSA_PRIVATE_KEY || ""]
     },
   },
   paths: {

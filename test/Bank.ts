@@ -4,13 +4,17 @@ import chaiAsPromised = require("chai-as-promised");
 use(chaiAsPromised)
 
 describe("Bank", function () {
+
+  interface Bank {
+    getBalance: any;
+    deposit: any;
+    withdraw: any
+  }
+  let bank: Bank;
+
   async function deployBankFixture() {
-    const [owner, otherAccount] = await ethers.getSigners();
-
     const Bank = await ethers.getContractFactory("Bank");
-    const bank = await Bank.deploy();
-
-    return { bank, owner, otherAccount };
+    bank = await Bank.deploy();
   }
 
   describe("Deployment", function () {
@@ -18,4 +22,25 @@ describe("Bank", function () {
       await expect(deployBankFixture()).to.eventually.not.be.rejected;
     });
   });
+  describe("Get Balance", function () {
+    it("Should return a balance", async function () {
+      const balance = await bank.getBalance();
+      expect(balance).equals(0);
+    });
+  });
+  describe("Deposit", function () {
+    it("Should deposit hbars to the contract", async function () {
+      await bank.deposit({value: ethers.utils.parseEther("10")});
+      const balance = await bank.getBalance();
+      expect(balance).equals(10);
+    });
+  });
+  describe("Withdraw", function () {
+    it("Should withdraw hbars from the contract", async function () {
+      await bank.withdraw(10);
+      const balance = await bank.getBalance();
+      expect(balance).equals(0);
+    });
+  });
+  
 });

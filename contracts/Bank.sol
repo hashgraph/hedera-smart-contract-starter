@@ -9,13 +9,13 @@ contract Bank {
    }
 
    function withdraw(uint _amount) public payable {
-     uint hbars = _amount * 100000000;
-     require(accounts[msg.sender] >= hbars, "Insufficient balance!");
-     accounts[msg.sender] -= hbars;
-     payable(msg.sender).transfer(hbars);
+
+     require(accounts[msg.sender] >= _amount, "Insufficient balance!");
+     accounts[msg.sender] -= _amount;
+     payable(msg.sender).transfer(_amount);
    }
 
    function getBalance() public view returns (uint res) {
-    return accounts[msg.sender] / 100000000;
+    return accounts[msg.sender];
   }
 }

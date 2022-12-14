@@ -6,9 +6,9 @@ use(chaiAsPromised)
 describe("Bank", function () {
 
   interface Bank {
-    getBalance: any;
-    deposit: any;
-    withdraw: any
+    getBalance(): Promise<any>;
+    deposit(value: object): Promise<any>;
+    withdraw(amount: number): Promise<any>;
   }
   let bank: Bank;
 
@@ -30,14 +30,14 @@ describe("Bank", function () {
   });
   describe("Deposit", function () {
     it("Should deposit hbars to the contract", async function () {
-      await bank.deposit({value: ethers.utils.parseEther("10")});
+      await bank.deposit({value: ethers.utils.parseUnits("10", 18)});
       const balance = await bank.getBalance();
-      expect(balance).equals(10);
+      expect(balance).equals(1000000000);
     });
   });
   describe("Withdraw", function () {
     it("Should withdraw hbars from the contract", async function () {
-      await bank.withdraw(10);
+      await bank.withdraw(1000000000);
       const balance = await bank.getBalance();
       expect(balance).equals(0);
     });

@@ -9,7 +9,7 @@ This project demonstrates a basic Hardhat use case that is preconfigured for Hed
 ECDSA_PRIVATE_KEY=xxxxx
 JSON_RPC_URL=https://testnet.hashio.io/api
 ```
-> :information_source: Get an ECDSA key at https://portal.hedera.com or create one through the sdk
+> :information_source: Get an ECDSA key at https://portal.hedera.com or [create one through the sdk](https://docs.hedera.com/guides/docs/sdks/keys/generate-a-new-key-pair#ecdsa-secp256k1_)
 
 #### RPC relay urls:
 * Testnet: https://testnet.hashio.io/api

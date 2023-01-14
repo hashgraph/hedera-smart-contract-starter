@@ -23,4 +23,8 @@ npx hardhat help
 npx hardhat compile
 npx hardhat test
 npx hardhat run scripts/deploy.ts
+npx hardhat run deployment/scripts/logic.ts #Deploys logic contract
+npx hardhat run deployment/scripts/transparentUpgradeableProxy.ts #To deploy logic contracts proxy 
+npx hardhat run deployment/scripts/upgradeProxy.ts #Upgrade to new implementation
+npx hardhat run deployment/scripts/deploy.ts #Deploy both logic and proxy in one go
 ```

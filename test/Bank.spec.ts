@@ -30,17 +30,17 @@ describe("Bank", function () {
   });
   describe("Deposit", function () {
     it("Should deposit hbars to the contract", async function () {
-      await bank.deposit({value: ethers.utils.parseUnits("10", 18)});
+      await bank.deposit({ value: ethers.utils.parseUnits(".00000000000001") });
       const balance = await bank.getBalance();
-      expect(balance).equals(1000000000);
+      expect(balance).equals(10000);
     });
   });
   describe("Withdraw", function () {
     it("Should withdraw hbars from the contract", async function () {
-      await bank.withdraw(1000000000);
+      await bank.withdraw(10000);
       const balance = await bank.getBalance();
       expect(balance).equals(0);
     });
   });
-  
+
 });

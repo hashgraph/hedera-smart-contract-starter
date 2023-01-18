@@ -5,11 +5,6 @@ This project demonstrates a basic Hardhat use case that is preconfigured for Hed
 
 ### Set up
 1. Edit values for variables in `.env_sample` and save as `.env`
-```bash
-ECDSA_PRIVATE_KEY=xxxxx
-JSON_RPC_URL=https://testnet.hashio.io/api
-```
-> :information_source: Get an ECDSA key at https://portal.hedera.com or create one through the sdk
 
 #### RPC relay urls:
 * Testnet: https://testnet.hashio.io/api

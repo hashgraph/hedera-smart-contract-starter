@@ -6,11 +6,6 @@ This project demonstrates a basic Hardhat use case that is preconfigured for Hed
 ### Set up
 1. Edit values for variables in `.env_sample` and save as `.env`
 
-#### RPC relay urls:
-* Testnet: https://testnet.hashio.io/api
-* Mainnet: https://mainnet.hashio.io/api
-* Previewnet: https://previewnet.hashio.io/api
-
 Try running some of the following tasks:
 
 ```shell

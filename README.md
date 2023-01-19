@@ -19,13 +19,19 @@ npx hardhat run deployment/scripts/deploy.ts #Deploy both logic and proxy in one
 ```
 
 ### Upgrade Flow
-1. Deploy Bank (v1)
-`npx hardhat run deployment/scripts/logic.ts`
+1. Deploy `Bank.sol` (v1)
+```
+npx hardhat run deployment/scripts/logic.ts
+```
 
-2. Deploy Proxy
-`npx hardhat run deployment/scripts/transparentUpgradeableProxy.ts`
+2. Deploy `Proxy.sol`
+```
+npx hardhat run deployment/scripts/transparentUpgradeableProxy.ts
+```
 
 3. Update `Bank.sol` (v2)
 
-4. Deploy upgraded Bank (v2)
-`npx hardhat run deployment/scripts/upgradeProxy.ts`
+4. Deploy `Bank.sol` (v2)
+```
+npx hardhat run deployment/scripts/upgradeProxy.ts
+```

@@ -2,8 +2,8 @@ import { main as deployContract } from "./logic";
 import { main as createContractProxy } from "./transparentUpgradeableProxy";
 
 async function main() {
-  const contractName = process.env.CONTRACT_NAME!.toLowerCase();
-  const contractFilepath = process.env.CONTRACT_PATH!.toLowerCase();
+  const contractName = process.env.CONTRACT_NAME!;
+  const contractFilepath = process.env.CONTRACT_PATH!;
   await deployContract(contractName, contractFilepath);
   await createContractProxy(contractName);
   return "Done";

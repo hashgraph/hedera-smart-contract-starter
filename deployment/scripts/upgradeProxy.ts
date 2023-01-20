@@ -75,7 +75,7 @@ import {
   export async function main(_contractName: string? = null) {
     const contractName = (
       _contractName ?? process.env.CONTRACT_NAME!
-    ).toLowerCase();
+    );
     const contractProxy = contractService.getContractWithProxy(contractName);
     contractId = contractProxy.transparentProxyId!;
     const contractGettingUpgraded = contractService.getContract(contractName);

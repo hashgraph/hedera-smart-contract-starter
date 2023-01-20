@@ -15,11 +15,11 @@ const contractMetadata = new ContractMetadata();
 export async function main(_contractName: string?= null, _filePath: string) {
     const contractName = (
         _contractName ?? CONTRACT_NAME!
-    ).toLowerCase();
+    );
 
     const filePath = (
         _filePath ?? CONTRACT_PATH!
-    ).toLowerCase();
+    );
 
     console.log(
         `Deploying (${contractName}) contract, where file path is (${filePath})`

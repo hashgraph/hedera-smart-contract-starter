@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import { DeployedContract } from "../model/contract";
-import { mirrorRequest } from "../api/mirrorNodeRequest";
+import { httpRequest } from "../api/mirrorNodeRequest";
 
 export class ContractService {
   public bankContractName = "bank";
@@ -20,7 +20,7 @@ export class ContractService {
 
   public getContractId = async (contractEvmAddress: string): Promise<any> => {
     console.log(`Fetching contract id for evm address ${contractEvmAddress}`);
-    const contractId: any = await mirrorRequest(contractEvmAddress, undefined);
+    const contractId: any = await httpRequest(contractEvmAddress, undefined);
     return contractId.contract_id;
   };
 
@@ -29,10 +29,9 @@ export class ContractService {
     contractAddress: string,
     contractName: string,
     calculatedHash: string
-  ) => {
-    const contractNameLowerCase = contractName.toLowerCase();
+  ) => {  
 
-    if (contractNameLowerCase === "transparentupgradeableproxy") {
+    if (contractName === "transparentUpgradeableProxy") {
       return;
     }
 
@@ -41,7 +40,7 @@ export class ContractService {
     console.log(`Contract id ${contractId}`);
 
     const newContract: DeployedContract = {
-      name: contractNameLowerCase,
+      name: contractName,
       id: contractId,
       address: "0x" + contractAddress,
       timestamp: new Date().toISOString(),
@@ -61,9 +60,8 @@ export class ContractService {
     contractAddress: string,
     contractName: string
   ) => {
-    const contractNameLowerCase = contractName.toLowerCase();
 
-    if (contractNameLowerCase === "transparentupgradeableproxy") {
+    if (contractName === "transparentUpgradeableProxy") {
       return;
     }
 
@@ -73,7 +71,7 @@ export class ContractService {
     console.log(`Contract id from api ${contractId}`);
 
     const newContract: DeployedContract = {
-      name: contractNameLowerCase,
+      name: contractName,
       id: contractId,
       address: contractAddress,
       timestamp: new Date().toISOString(),

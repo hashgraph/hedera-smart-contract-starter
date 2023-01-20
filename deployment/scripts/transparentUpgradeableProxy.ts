@@ -14,7 +14,7 @@ const contractService = new ContractService();
 export async function main(_contractName: string? = null) {
   const contractName = (
     _contractName ?? CONTRACT_NAME!
-  ).toLowerCase();
+  );
   console.log(`contractName: ${contractName}`);
   const contractBeingDeployed: DeployedContract =
     contractService.getContract(contractName);

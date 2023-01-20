@@ -6,8 +6,6 @@ import "@openzeppelin/hardhat-upgrades";
 
 dotenv.config();
 
-const { JSON_RPC_URL } = process.env;
-
 const config: HardhatUserConfig = {
   solidity: {
     version: "0.8.17",
@@ -22,9 +20,6 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
-    remoteRelay: {
-      url: JSON_RPC_URL,
-    },
     hardhat: {
       allowUnlimitedContractSize: true,
     },

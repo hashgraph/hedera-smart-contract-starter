@@ -7,3 +7,8 @@ export interface DeployedContract {
     timestamp: string;
     hash: string;
 }
+export interface Contract {
+    contract_id: string;
+    contractName: string;
+    bytecode: string;
+}

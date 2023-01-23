@@ -37,6 +37,7 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "@hashgraph/sdk": "^2.19.0"
+    "@hashgraph/sdk": "^2.19.0",
+    "node-fetch": "^3.3.0"
   }
 }

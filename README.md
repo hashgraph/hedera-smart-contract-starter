@@ -1,6 +1,6 @@
 # hedera-smart-contract-starter
 
-This project demonstrates a basic Hardhat use case that is preconfigured for Hedera. It comes with a simple Bank contract composed of `deposit` `withdraw` and `getBalance` functions, a test for that contract, and a script that deploys that contract.
+This repository contains a smart contract starter project that utilizes a proxy pattern to enable upgradeable contracts on Hedera. The proxy pattern allows for the logic of a contract to be upgraded without the need to redeploy the contract or transfer its assets to a new contract address. This allows for easy maintenance and updates to the contract's functionality. The starter includes a basic smart contract `Bank.sol` which is the logic contract and instructions for deploying/upgrading it on the Hedera.
 
 
 ### Set up

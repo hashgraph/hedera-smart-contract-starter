@@ -1,46 +1,73 @@
-const https = require("https");
+import { Contract } from "../model/contract"
+import { ClientRequest } from "http";
+import http = require("https");
 
-export const httpRequest = async (
-    contractEvmAddress: string,
-    postData: any
-): Promise<any> => {
-    const options = {
-        hostname: "testnet.mirrornode.hedera.com",
-        port: 443,
-        path: "/api/v1/contracts/" + contractEvmAddress,
-        method: "GET",
-    };
+export class HttpRequest {
 
-    return new Promise(function (resolve, reject) {
-        var req = https.request(options, function (res: any) {
-            // reject on bad status
-            if (res.statusCode < 200 || res.statusCode >= 300) {
-                return reject(new Error("statusCode=" + res.statusCode));
+    public static async send(contractEvmAddress: string, data?: never): Promise<Contract> {
+        let options: http.RequestOptions;
+        let result: string;
+        const promise = new Promise<Contract>((resolve, reject) => {
+            options = {
+                hostname: "testnet.mirrornode.hedera.com",
+                port: 443,
+                path: `/api/v1/contracts/${contractEvmAddress}`,
+                method: "GET",
+            };
+
+            const req: ClientRequest = http.request(options, (res) => {
+
+                console.log('statusCode:', res.statusCode);
+                console.log('headers:', res.headers);
+
+                res.on("data", chunk => {
+                    result += chunk;
+                });
+
+                res.on("error", err => {
+                    console.log(err);
+                    reject(err);
+                });
+
+                res.on("end", () => {
+                    try {
+                        if (res.statusCode === 200) {
+                            console.log(res.statusCode, result);
+                            resolve(JSON.parse(result) as Contract);
+                        }
+                    } catch (err) {
+                        console.log(err);
+                        reject(err);
+                    }
+                });
+            });
+
+            req.on("error", (err: Error) => {
+                console.log(err);
+                reject(err);
+            });
+
+            req.on('timeout', (err: Error) => {
+                console.log(err);
+                req.abort();
+            });
+
+            req.on('uncaughtException', (err: Error) => {
+                console.log(err);
+                req.abort();
+            });
+
+            if (data) {
+                const body = JSON.stringify(data);
+                req.write(body);
             }
-            // cumulate data
-            var body: Array<any> = [];
-            res.on("data", function (chunk: any) {
-                body.push(chunk);
+
+            req.end(() => {
+                console.log('request ends');
             });
-            // resolve on end
-            res.on("end", function () {
-                try {
-                    body = JSON.parse(Buffer.concat(body).toString());
-                } catch (e) {
-                    reject(e);
-                }
-                resolve(body);
-            });
+
         });
-        // reject on request error
-        req.on("error", function (err: any) {
-            // This is not a "Second reject", just a different sort of failure
-            reject(err);
-        });
-        if (postData) {
-            req.write(postData);
-        }
-        // IMPORTANT
-        req.end();
-    });
-};
+
+        return promise;
+    }
+}

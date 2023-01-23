@@ -5,16 +5,16 @@ use(chaiAsPromised)
 
 describe("Bank", function () {
 
-  interface Bank {
-    getBalance(): Promise<any>;
-    deposit(value: object): Promise<any>;
-    withdraw(amount: number): Promise<any>;
+  type Bank = {
+    getBalance(): Promise<string>;
+    deposit(value: object): Promise<never>;
+    withdraw(amount: number): Promise<number>;
   }
   let bank: Bank;
 
   async function deployBankFixture() {
     const Bank = await ethers.getContractFactory("Bank");
-    bank = await Bank.deploy();
+    bank = await Bank.deploy() as unknown as Bank;
   }
 
   describe("Deployment", function () {

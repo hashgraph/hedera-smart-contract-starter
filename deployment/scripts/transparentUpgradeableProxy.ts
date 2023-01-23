@@ -11,16 +11,16 @@ const {
 
 const contractService = new ContractService();
 
-export async function main(_contractName: string? = null) {
+export async function main(_contractName: string | null) {
   const contractName = (
-    _contractName ?? CONTRACT_NAME!
+    _contractName ?? (CONTRACT_NAME || '')
   );
   console.log(`contractName: ${contractName}`);
   const contractBeingDeployed: DeployedContract =
     contractService.getContract(contractName);
   console.log(`contractName: ${contractBeingDeployed.id}`);
   const contractAddress = contractBeingDeployed.address;
-  const adminId = AccountId.fromString(ADMIN_ID!);
+  const adminId = AccountId.fromString(ADMIN_ID || '');
   const deployment = new Deployment();
   const filePath =
     "./artifacts/@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol/TransparentUpgradeableProxy.json";
@@ -40,12 +40,4 @@ export async function main(_contractName: string? = null) {
     timestamp: new Date().toISOString(),
   };
   contractService.updateContractRecord(updatedContract, contractBeingDeployed);
-}
-if (require.main === module) {
-  main()
-    .then(() => process.exit(0))
-    .catch((error) => {
-      console.error(error);
-      process.exit(1);
-    });
 }

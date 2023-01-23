@@ -1,5 +1,4 @@
 import { Deployment } from "../../utils/deployContractOnTestnet";
-import ContractMetadata from "../../utils/ContractMetadata";
 
 import { ContractFunctionParameters } from "@hashgraph/sdk";
 import dotenv from "dotenv";
@@ -7,18 +6,17 @@ dotenv.config();
 const {
     CONTRACT_NAME,
     CONTRACT_PATH
-  } = process.env;
+} = process.env;
 
 const deployment = new Deployment();
-const contractMetadata = new ContractMetadata();
 
-export async function main(_contractName: string?= null, _filePath: string) {
+export async function main(_contractName: string | null, _filePath: string) {
     const contractName = (
-        _contractName ?? CONTRACT_NAME!
+        _contractName ?? (CONTRACT_NAME || '')
     );
 
     const filePath = (
-        _filePath ?? CONTRACT_PATH!
+        _filePath ?? (CONTRACT_PATH || '')
     );
 
     console.log(
@@ -34,13 +32,4 @@ export async function main(_contractName: string?= null, _filePath: string) {
         )}`
     );
     return `Successfully deployed`;
-}
-
-if (require.main === module) {
-    main()
-        .then(() => process.exit(0))
-        .catch((error) => {
-            console.error(error);
-            process.exit(1);
-        });
 }

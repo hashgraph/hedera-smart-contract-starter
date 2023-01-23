@@ -12,26 +12,19 @@ Try running some of the following tasks:
 npx hardhat help
 npx hardhat compile
 npx hardhat test
-npx hardhat run deployment/scripts/logic.ts #Deploys logic contract (Bank)
-npx hardhat run deployment/scripts/transparentUpgradeableProxy.ts #To deploy logic contracts proxy 
+npx hardhat run deployment/scripts/deploy.ts #Deploy logic and proxy contracts
 npx hardhat run deployment/scripts/upgradeProxy.ts #Upgrade to new implementation
-npx hardhat run deployment/scripts/deploy.ts #Deploy both logic and proxy in one go
 ```
 
 ### Upgrade Flow
-1. Deploy `Bank.sol` (v1)
+1. Deploy `Bank.sol` (v1 logic contract) and `TransparentUpgradeableProxy.sol` (proxy contract)
 ```
-npx hardhat run deployment/scripts/logic.ts
-```
-
-2. Deploy `Proxy.sol`
-```
-npx hardhat run deployment/scripts/transparentUpgradeableProxy.ts
+npx hardhat run deployment/scripts/deploy.ts
 ```
 
-3. Update `Bank.sol` (v2)
+2. Update `Bank.sol` (v2 logic contract)
 
-4. Deploy `Bank.sol` (v2)
+3. Upgrade deployment
 ```
 npx hardhat run deployment/scripts/upgradeProxy.ts
 ```

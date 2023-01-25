@@ -1,6 +1,26 @@
+/*-
+ *
+ * Hedera smart contract starter
+ *
+ * Copyright (C) 2023 Hedera Hashgraph, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 import * as fs from "fs";
-import { DeployedContract } from "../model/contract";
-import { httpRequest } from "../api/mirrorNodeRequest";
+import { Contract, DeployedContract } from "../model/contract";
+import { HttpRequest } from "../api/mirrorNodeRequest";
 
 export class ContractService {
   public bankContractName = "bank";
@@ -14,22 +34,22 @@ export class ContractService {
   }
 
   private readFileContent = () => {
-    const rawdata: any = fs.readFileSync(this.contractRecordFile);
-    return JSON.parse(rawdata);
+    const rawdata: Buffer = fs.readFileSync(this.contractRecordFile);
+    return JSON.parse(String(rawdata)) as [DeployedContract];
   };
 
-  public getContractId = async (contractEvmAddress: string): Promise<any> => {
+  public getContractId = async (contractEvmAddress: string): Promise<string> => {
     console.log(`Fetching contract id for evm address ${contractEvmAddress}`);
-    const contractId: any = await httpRequest(contractEvmAddress, undefined);
-    return contractId.contract_id;
+    const contract: Contract = await HttpRequest.send(contractEvmAddress, undefined);
+    return contract.contract_id;
   };
 
-  public saveDeployedContract = async (
+  public saveDeployedContract = (
     contractId: string,
     contractAddress: string,
     contractName: string,
     calculatedHash: string
-  ) => {  
+  ) => {
 
     if (contractName === "transparentUpgradeableProxy") {
       return;
@@ -75,6 +95,7 @@ export class ContractService {
       id: contractId,
       address: contractAddress,
       timestamp: new Date().toISOString(),
+      hash: ""
     };
 
     const contractsWithNewContract = [...contracts, newContract];

@@ -1,3 +1,23 @@
+/*-
+ *
+ * Hedera smart contract starter
+ *
+ * Copyright (C) 2023 Hedera Hashgraph, LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 import { expect, use } from "chai";
 import { ethers } from "hardhat";
 import chaiAsPromised = require("chai-as-promised");
@@ -5,16 +25,16 @@ use(chaiAsPromised)
 
 describe("Bank", function () {
 
-  interface Bank {
-    getBalance(): Promise<any>;
-    deposit(value: object): Promise<any>;
-    withdraw(amount: number): Promise<any>;
+  type Bank = {
+    getBalance(): Promise<string>;
+    deposit(value: object): Promise<never>;
+    withdraw(amount: number): Promise<number>;
   }
   let bank: Bank;
 
   async function deployBankFixture() {
     const Bank = await ethers.getContractFactory("Bank");
-    bank = await Bank.deploy();
+    bank = await Bank.deploy() as unknown as Bank;
   }
 
   describe("Deployment", function () {

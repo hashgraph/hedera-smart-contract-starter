@@ -6,11 +6,7 @@
         "esModuleInterop": true,
         "outDir": "dist"
     },
-    "include": [
-        "./scripts/**/*.ts",
-        "./test/**/*.ts"
-    ],
     "exclude": [
-        "node_modules"
+        "resources/license-header.js"
     ]
 }

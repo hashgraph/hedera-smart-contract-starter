@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "./Node.sol";
 
-contract NodeV2 is Node {
+contract TopicNodeV2 is TopicNode {
     string private _message;
 
     function setMessage(string memory message) public {

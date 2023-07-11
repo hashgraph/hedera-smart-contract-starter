@@ -36,16 +36,23 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
-    hederaTestnet: {
-      url: "https://testnet.hashio.io/api",
-      chainId: 296,
-      accounts: [process.env.ECDSA_PRIVATE_KEY || ''], // Private key of your account
+    local: {
+      url: "http://127.0.0.1:7546",
+      chainId: 298,
+      accounts: [process.env.ECDSA_PRIVATE_KEY_LOCAL || ''], // Private key generated from 'hedera start'
       gas: "auto",
       gasPrice: "auto",
-      gasMultiplier: 3 
+      gasMultiplier: 3
+    },
+    testnet: {
+      url: "https://testnet.hashio.io/api",
+      chainId: 296,
+      accounts: [process.env.ECDSA_PRIVATE_KEY_TEST || ''], // Private key of your account
+      gas: "auto",
+      gasPrice: "auto",
+      gasMultiplier: 3
     }
   }
-  
 };
 
 export default config;

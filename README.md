@@ -12,10 +12,10 @@ A Beacon Proxy is a proxy that references a Beacon contract to determine its imp
 
 ## How It Works
 
-This project contains two contracts: `Node` and `NodeV2`.
+This project contains two contracts: `TopicNode` and `TopicNodeV2`.
 
-- `Node` is a simple contract that enables storing and retrieving a Hedera Topic ID.
-- `NodeV2` is an enhanced version of `Node` that introduces an additional feature: the ability to set a message.
+- `TopicNode` is a simple contract that enables storing and retrieving a Hedera Topic ID.
+- `TopicNodeV2` is an enhanced version of `TopicNode` that introduces an additional feature: the ability to set a message.
 
 We use OpenZeppelin's upgrades plugins to deploy these contracts as upgradeable contracts.
 
@@ -33,37 +33,37 @@ We use OpenZeppelin's upgrades plugins to deploy these contracts as upgradeable 
     npx hardhat compile
     ```
 
-3. Deploy the `Node` contract:
+3. Deploy the `TopicNode` contract:
 
     ```sh
-    npx hardhat run scripts/create-node.ts --network hederaTestnet
+    npx hardhat run scripts/create-node.ts --network testnet
     ```
 
-    This script deploys the `Node` contract as a proxy contract, initializes it with a Topic ID '0.0.1234', and prints the address of the proxy contract.
+    This script deploys the `TopicNode` contract as a proxy contract, initializes it with a Topic ID '0.0.1234', and prints the address of the proxy contract.
 
-4. Upgrade the `Node` contract to `NodeV2`:
+4. Upgrade the `TopicNode` contract to `TopicNodeV2`:
 
     ```sh
-    npx hardhat run scripts/upgrade-node.ts --network hederaTestnet
+    npx hardhat run scripts/upgrade-node.ts --network testnet
     ```
 
-    This script upgrades the `Node` contract to `NodeV2`, sets a new message, and prints the updated message.
+    This script upgrades the `TopicNode` contract to `TopicNodeV2`, sets a new message, and prints the updated message.
 
-5. Deploy the `Node` contract as a Beacon Proxy:
+5. Deploy the `TopicNode` contract as a Beacon Proxy:
 
     ```sh
-    npx hardhat run scripts/create-node-beacon.ts --network hederaTestnet
+    npx hardhat run scripts/create-node-beacon.ts --network testnet
     ```
 
-    This script deploys a Beacon and a Beacon Proxy for the `Node` contract, initializes the Beacon Proxy with a Topic ID '0.0.1234', and prints the addresses of the Beacon and the Beacon Proxy.
+    This script deploys a Beacon and a Beacon Proxy for the `TopicNode` contract, initializes the Beacon Proxy with a Topic ID '0.0.1234', and prints the addresses of the Beacon and the Beacon Proxy.
 
-6. Upgrade the `Node` contract to `NodeV2` for the Beacon Proxy:
+6. Upgrade the `TopicNode` contract to `TopicNodeV2` for the Beacon Proxy:
 
     ```sh
-    npx hardhat run scripts/upgrade-node-beacon.ts --network hederaTestnet
+    npx hardhat run scripts/upgrade-node-beacon.ts --network testnet
     ```
 
-    This script upgrades the Beacon to point to `NodeV2`, effectively upgrading all Beacon Proxies. It sets a new message on the Beacon Proxy and prints the updated message.
+    This script upgrades the Beacon to point to `TopicNodeV2`, effectively upgrading all Beacon Proxies. It sets a new message on the Beacon Proxy and prints the updated message.
 
 These scripts illustrate how proxies and beacon proxies allow the contract logic to be upgraded while keeping the contract address constant. The use of beacon proxies also demonstrates the power of simultaneous upgrades across multiple contracts.
 

@@ -1,8 +1,7 @@
 {
   "name": "hedera-smart-contract-starter",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A smart contract starter with upgradeable contracts using ethers.js",
   "scripts": {
     "lint": "eslint ."
   },

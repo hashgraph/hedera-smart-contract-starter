@@ -1,9 +1,9 @@
 //SPDX-License-Identifier: 	Apache-2.0
 pragma solidity ^0.8.0;
 
-import "./Node.sol";
+import "./Topic.sol";
 
-contract TopicNodeV2 is TopicNode {
+contract TopicV2 is Topic {
     string private _message;
 
     function setMessage(string memory message) public {

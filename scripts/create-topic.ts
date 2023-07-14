@@ -18,7 +18,18 @@
  *
  */
 
-declare interface NodeContract {
-  getTopicId: () => Promise<string>;
-  setMessage(message: string): Promise<void>;
+import { ethers, upgrades } from "hardhat";
+
+async function main() {
+    console.log("Fetching Topic contract...");
+    const Topic = await ethers.getContractFactory("Topic");
+
+    console.log("Deploying Topic contract with topic ID '0.0.1234'...");
+    const topic = await upgrades.deployProxy(Topic, ["0.0.1234"]);
+    await topic.deployed();
+    console.log("Topic contract deployed to:", topic.address);
+
+    console.log("Topic contract initialized with topic ID:", await (topic as unknown as TopicContract).getTopicId());
 }
+
+main().catch(console.error);

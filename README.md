@@ -1,6 +1,6 @@
-# Upgradeable Smart Contracts with Proxies and Beacon Proxies
+# Upgradeable Smart Contract Starter with Proxies and Beacon Proxies
 
-This project provides a hands-on demonstration of using upgradeable smart contracts with OpenZeppelin's upgrades plugins in Hardhat. Specifically, it illustrates the use of both Proxies and Beacon Proxies.
+This project provides a hands-on demonstration of using upgradeable smart contracts with OpenZeppelin's upgrades plugins in Hardhat. Specifically, it is a smart contract starter project that illustrates the use of both Proxies and Beacon Proxies.
 
 ## Understanding Proxies
 
@@ -12,12 +12,31 @@ A Beacon Proxy is a proxy that references a Beacon contract to determine its imp
 
 ## How It Works
 
-This project contains two contracts: `TopicNode` and `TopicNodeV2`.
+This project contains two contracts: `Topic` and `TopicV2`.
 
-- `TopicNode` is a simple contract that enables storing and retrieving a Hedera Topic ID.
-- `TopicNodeV2` is an enhanced version of `TopicNode` that introduces an additional feature: the ability to set a message.
+- `Topic` is a simple contract that enables storing and retrieving a Hedera Topic ID.
+- `TopicV2` is an enhanced version of `Topic` that introduces an additional feature: the ability to set a message.
 
 We use OpenZeppelin's upgrades plugins to deploy these contracts as upgradeable contracts.
+
+## Setting up Local Node and Private Key
+
+Before running this project, you need to set up your local node and private key in the `.env` file. 
+:information_source: [Make sure you meet these requirements and docker setttings for local node to work](https://github.com/hashgraph/hedera-local-node#requirements)
+
+1. Run the hedera local node:
+
+    ```sh
+    hedera start -d
+    ```
+
+    Note: You can run this in a separate terminal window and keep it running in the background.
+
+2. Add a `ECDSA_PRIVATE_KEY_LOCAL` entry to the `.env` file after the local node starts up and generates your accounts. This should be your local node's ECDSA private key, which you would use for signing transactions on the local network.
+
+    ```
+    ECDSA_PRIVATE_KEY_LOCAL=your-generated-private-ecdsa-key
+    ```
 
 ## Running the Project
 
@@ -33,37 +52,37 @@ We use OpenZeppelin's upgrades plugins to deploy these contracts as upgradeable 
     npx hardhat compile
     ```
 
-3. Deploy the `TopicNode` contract:
+3. Deploy the `Topic` contract:
 
     ```sh
-    npx hardhat run scripts/create-node.ts --network testnet
+    npx hardhat run scripts/create-topic.ts --network local
     ```
 
-    This script deploys the `TopicNode` contract as a proxy contract, initializes it with a Topic ID '0.0.1234', and prints the address of the proxy contract.
+    This script deploys the `Topic` contract as a proxy contract, initializes it with a Topic ID '0.0.1234', and prints the address of the proxy contract.
 
-4. Upgrade the `TopicNode` contract to `TopicNodeV2`:
+4. Upgrade the `Topic` contract to `TopicV2`:
 
     ```sh
-    npx hardhat run scripts/upgrade-node.ts --network testnet
+    npx hardhat run scripts/upgrade-topic.ts --network local
     ```
 
-    This script upgrades the `TopicNode` contract to `TopicNodeV2`, sets a new message, and prints the updated message.
+    This script upgrades the `Topic` contract to `TopicV2`, sets a new message, and prints the updated message.
 
-5. Deploy the `TopicNode` contract as a Beacon Proxy:
+5. Deploy the `Topic` contract as a Beacon Proxy:
 
     ```sh
-    npx hardhat run scripts/create-node-beacon.ts --network testnet
+    npx hardhat run scripts/create-topic-beacon.ts --network local
     ```
 
-    This script deploys a Beacon and a Beacon Proxy for the `TopicNode` contract, initializes the Beacon Proxy with a Topic ID '0.0.1234', and prints the addresses of the Beacon and the Beacon Proxy.
+    This script deploys a Beacon and a Beacon Proxy for the `Topic` contract, initializes the Beacon Proxy with a Topic ID '0.0.1234', and prints the addresses of the Beacon and the Beacon Proxy.
 
-6. Upgrade the `TopicNode` contract to `TopicNodeV2` for the Beacon Proxy:
+6. Upgrade the `Topic` contract to `TopicV2` for the Beacon Proxy:
 
     ```sh
-    npx hardhat run scripts/upgrade-node-beacon.ts --network testnet
+    npx hardhat run scripts/upgrade-topic-beacon.ts --network local
     ```
 
-    This script upgrades the Beacon to point to `TopicNodeV2`, effectively upgrading all Beacon Proxies. It sets a new message on the Beacon Proxy and prints the updated message.
+    This script upgrades the Beacon to point to `TopicV2`, effectively upgrading all Beacon Proxies. It sets a new message on the Beacon Proxy and prints the updated message.
 
 These scripts illustrate how proxies and beacon proxies allow the contract logic to be upgraded while keeping the contract address constant. The use of beacon proxies also demonstrates the power of simultaneous upgrades across multiple contracts.
 
@@ -76,4 +95,4 @@ to see how you can get involved.
 This project is governed by the
 [Contributor Covenant Code of Conduct](https://github.com/hashgraph/.github/blob/main/CODE_OF_CONDUCT.md). By
 participating, you are expected to uphold this code of conduct. Please report unacceptable behavior
-to [oss@hedera.com](mailto:oss@hedera.com)
+to [oss@hedera.com](mailto:oss@hedera.com) 

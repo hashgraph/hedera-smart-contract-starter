@@ -21,15 +21,20 @@
 import { ethers, upgrades } from "hardhat";
 
 async function main() {
-    console.log("Fetching Node contract...");
-    const Node = await ethers.getContractFactory("Node");
+  console.log("Fetching Topic contract...");
+  const Topic = await ethers.getContractFactory("Topic");
 
-    console.log("Deploying Node contract with topic ID '0.0.1234'...");
-    const node = await upgrades.deployProxy(Node, ["0.0.1234"]);
-    await node.deployed();
-    console.log("Node contract deployed to:", node.address);
+  console.log("Deploying Topic contract as a beacon...");
+  const beacon = await upgrades.deployBeacon(Topic);
+  await beacon.deployed();
+  console.log("Beacon deployed to:", beacon.address);
 
-    console.log("Node contract initialized with topic ID:", await (node as unknown as NodeContract).getTopicId());
+  console.log("Deploying Topic contract as a beacon proxy with topic ID '0.0.1234'...");
+  const topic = await upgrades.deployBeaconProxy(beacon, Topic, ["0.0.1234"]);
+  await topic.deployed();
+  console.log("Topic beacon proxy deployed to:", topic.address);
+
+  console.log("Topic beacon proxy initialized with topic ID:", await (topic as unknown as TopicContract).getTopicId());
 }
 
 main().catch(console.error);

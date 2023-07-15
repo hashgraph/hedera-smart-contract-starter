@@ -19,10 +19,10 @@ This project contains two contracts: `Topic` and `TopicV2`.
 
 We use OpenZeppelin's upgrades plugins to deploy these contracts as upgradeable contracts.
 
-## Setting up Local Node and Private Key
+## Setting up Local Node
 
 Before running this project, you need to set up your local node and private key in the `.env` file. 
-:information_source: [Make sure you meet these requirements and docker setttings for local node to work](https://github.com/hashgraph/hedera-local-node#requirements)
+:information_source: [Make sure you meet these requirements and docker settings for local node to work](https://github.com/hashgraph/hedera-local-node#requirements)
 
 1. Run the hedera local node:
 
@@ -85,6 +85,24 @@ Before running this project, you need to set up your local node and private key 
     This script upgrades the Beacon to point to `TopicV2`, effectively upgrading all Beacon Proxies. It sets a new message on the Beacon Proxy and prints the updated message.
 
 These scripts illustrate how proxies and beacon proxies allow the contract logic to be upgraded while keeping the contract address constant. The use of beacon proxies also demonstrates the power of simultaneous upgrades across multiple contracts.
+
+## Running the Tests
+
+To test the contracts, we've provided a testing suite in the `test` directory. You can run these tests using the following commands:
+
+1. Compile the contracts (if not already compiled):
+
+    ```sh
+    npx hardhat compile
+    ```
+
+2. Run the tests:
+
+    ```sh
+    npx hardhat test
+    ```
+
+The test suite uses Waffle for fast, reliable testing of Ethereum contracts. It tests the base functionality of the `Topic` and `TopicV2` contracts, as well as the upgradeability provided by the proxies.
 
 # Contributing
 Contributions are welcome. Please see the

@@ -11,8 +11,10 @@
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.3",
     "@openzeppelin/hardhat-upgrades": "^1.28.0",
+    "@types/mocha": "^10.0.1",
     "@types/node": "^20.3.1",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
+    "chai": "^4.3.7",
     "eslint": "^8.43.0",
     "eslint-plugin-license-header": "^0.6.0",
     "ethereum-waffle": "^4.0.10",

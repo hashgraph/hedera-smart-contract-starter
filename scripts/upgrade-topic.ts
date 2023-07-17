@@ -29,7 +29,7 @@ async function main() {
     console.log("Upgrading Topic contract to TopicV2...");
     const topic = await upgrades.upgradeProxy(TOPIC_ADDRESS, TopicV2);
 
-    console.log("Setting message on TopicV2 contract to 'Hello, Hedera'...");
+    console.log("Setting message on TopicV2 contract to 'Hello, Hedera' for TopicId:", await (topic as unknown as TopicContract).getTopicId());
     await (topic as unknown as TopicContract).setMessage("Hello, Hedera");
     console.log("TopicV2 contract message:", await (topic as unknown as TopicContract).getMessage());
 }

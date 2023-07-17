@@ -33,7 +33,7 @@ async function main() {
   const TOPIC_PROXY_ADDRESS = "..."; // replace with your Topic beacon proxy contract address
   const topicProxy = await ethers.getContractAt("TopicV2", TOPIC_PROXY_ADDRESS);
 
-  console.log("Setting message on TopicV2 beacon proxy to 'Hello, Hedera'...");
+  console.log("Setting message on TopicV2 beacon proxy to 'Hello, Hedera' for TopicId:", await (topicProxy as unknown as TopicContract).getTopicId());
   await (topicProxy as unknown as TopicContract).setMessage("Hello, Hedera");
   console.log("TopicV2 beacon proxy message:", await (topicProxy as unknown as TopicContract).getMessage());
 }

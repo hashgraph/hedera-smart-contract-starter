@@ -21,7 +21,8 @@ We use OpenZeppelin's upgrades plugins to deploy these contracts as upgradeable 
 
 ## Setting up Local Node
 
-Before running this project, you need to set up your local node and private key in the `.env` file. 
+Before running this project, you need to set up your local node and private key in the `.env` file.
+
 :information_source: [Make sure you meet these requirements and docker settings for local node to work](https://github.com/hashgraph/hedera-local-node#requirements)
 
 1. Run the hedera local node:

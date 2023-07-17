@@ -18,17 +18,18 @@
  *
  */
 
-export interface DeployedContract {
-    name: string;
-    id: string;
-    address: string;
-    transparentProxyAddress?: string;
-    transparentProxyId?: string;
-    timestamp: string;
-    hash: string;
+import { ethers, upgrades } from "hardhat";
+
+async function main() {
+    console.log("Fetching Topic contract...");
+    const Topic = await ethers.getContractFactory("Topic");
+
+    console.log("Deploying Topic contract with topic ID '0.0.1234'...");
+    const topic = await upgrades.deployProxy(Topic, ["0.0.1234"]);
+    await topic.deployed();
+    console.log("Topic contract deployed to:", topic.address);
+
+    console.log("Topic contract initialized with topic ID:", await (topic as unknown as TopicContract).getTopicId());
 }
-export interface Contract {
-    contract_id: string;
-    contractName: string;
-    bytecode: string;
-}
+
+main().catch(console.error);

@@ -18,32 +18,41 @@
  *
  */
 
-import * as dotenv from "dotenv";
-import { HardhatUserConfig } from "hardhat/config";
-import "@nomicfoundation/hardhat-toolbox";
-import "hardhat-contract-sizer";
-import "@openzeppelin/hardhat-upgrades";
+import { HardhatUserConfig } from 'hardhat/config';
+import '@openzeppelin/hardhat-upgrades';
+import '@nomiclabs/hardhat-ethers';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 const config: HardhatUserConfig = {
   solidity: {
-    version: "0.8.17",
+    version: '0.8.17',
     settings: {
       optimizer: {
         enabled: true,
-        /// Note: A “runs” parameter of “1” will produce short but expensive code.
-        ///       In contrast, a larger “runs” parameter will produce longer but more gas efficient code.
-        ///       The maximum value of the parameter is 2**32-1. So it could change as required.
         runs: 13000,
       },
     },
   },
   networks: {
-    hardhat: {
-      allowUnlimitedContractSize: true,
+    local: {
+      url: "http://127.0.0.1:7546",
+      chainId: 298,
+      accounts: [process.env.ECDSA_PRIVATE_KEY_LOCAL || ''], // Private key generated from 'hedera start -d'
+      gas: "auto",
+      gasPrice: "auto",
+      gasMultiplier: 3
     },
-  },
+    testnet: {
+      url: "https://testnet.hashio.io/api",
+      chainId: 296,
+      accounts: [process.env.ECDSA_PRIVATE_KEY_TEST || ''], // Private key of your testnet account
+      gas: "auto",
+      gasPrice: "auto",
+      gasMultiplier: 3
+    }
+  }
 };
 
 export default config;

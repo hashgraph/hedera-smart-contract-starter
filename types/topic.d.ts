@@ -18,10 +18,8 @@
  *
  */
 
-export default class ClientMetadata {
-  static SUPPORTED_CONTRACTS_FOR_DEPLOYMENT = [
-    "Bank",
-  ];
-
-  static SUPPORTED_PROXY_OPTIONS = ["create", "update"];
+declare interface TopicContract {
+  getTopicId: () => Promise<string>;
+  setMessage(message: string): Promise<void>;
+  getMessage(): Promise<void>;
 }

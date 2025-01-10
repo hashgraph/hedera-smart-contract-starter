@@ -1,5 +1,5 @@
 {
-  "name": "hedera-smart-contract-starter",
+  "name": "@hashgraph/hedera-smart-contract-starter",
   "version": "1.0.0",
   "description": "A smart contract starter with upgradeable contracts using ethers.js",
   "scripts": {
